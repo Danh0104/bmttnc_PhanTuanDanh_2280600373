@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Caesar Cipher</title>
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+
+    .card {
+      border-radius: 15px;
+    }
+
+    .section-title {
+      font-size: 28px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 30px;
+      color: #2c3e50;
+    }
+
+    .result-box {
+      font-family: monospace;
+      white-space: pre-wrap;
+      background-color: #eef2f7;
+      border-radius: 8px;
+      padding: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container py-5">
+    <h2 class="section-title">Caesar Cipher Tool</h2>
+
+    <!-- Encryption Card -->
+    <div class="card shadow-sm mb-5">
+      <div class="card-header bg-primary text-white font-weight-bold">
+        🔐 ENCRYPTION
+      </div>
+      <div class="card-body">
+        <form id="encrypt-form" class="needs-validation" novalidate>
+          <div class="form-group">
+            <label for="inputPlainText">Plain Text:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="inputPlainText"
+              name="plain_text"
+              placeholder="Enter your plain text"
+              required
+            />
+            <div class="invalid-feedback">Please enter plain text.</div>
+          </div>
+          <div class="form-group">
+            <label for="inputKeyPlain">Key:</label>
+            <input
+              type="number"
+              class="form-control"
+              id="inputKeyPlain"
+              name="key"
+              placeholder="Enter shift key"
+              min="0"
+              required
+            />
+            <div class="invalid-feedback">Please enter a valid key.</div>
+          </div>
+          <button type="submit" class="btn btn-primary">Encrypt</button>
+        </form>
+        <div
+          id="encrypt-result"
+          class="alert mt-4"
+          style="display: none"
+        ></div>
+      </div>
+    </div>
+
+    <!-- Decryption Card -->
+    <div class="card shadow-sm">
+      <div class="card-header bg-success text-white font-weight-bold">
+        🔓 DECRYPTION
+      </div>
+      <div class="card-body">
+        <form id="decrypt-form" class="needs-validation" novalidate>
+          <div class="form-group">
+            <label for="inputCipherText">Cipher Text:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="inputCipherText"
+              name="cipher_text"
+              placeholder="Enter cipher text"
+              required
+            />
+            <div class="invalid-feedback">Please enter cipher text.</div>
+          </div>
+          <div class="form-group">
+            <label for="inputKeyCipher">Key:</label>
+            <input
+              type="number"
+              class="form-control"
+              id="inputKeyCipher"
+              name="key"
+              placeholder="Enter shift key"
+              min="0"
+              required
+            />
+            <div class="invalid-feedback">Please enter a valid key.</div>
+          </div>
+          <button type="submit" class="btn btn-success">Decrypt</button>
+        </form>
+        <div
+          id="decrypt-result"
+          class="alert mt-4"
+          style="display: none"
+        ></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    (function () {
+      'use strict';
+      window.addEventListener('load', function () {
+        var forms = document.getElementsByClassName('needs-validation');
+        Array.prototype.forEach.call(forms, function (form) {
+          form.addEventListener('submit', function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+
+            if (form.checkValidity()) {
+              var formData = new FormData(form);
+              var isEncrypt = form.id === 'encrypt-form';
+              var url = isEncrypt
+                ? '/api/caesar/encrypt'
+                : '/api/caesar/decrypt';
+
+              var resultDiv = isEncrypt
+                ? '#encrypt-result'
+                : '#decrypt-result';
+
+              $.ajax({
+                url: url,
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                  var html = `
+                    <div class="result-box">
+                      <strong>Input:</strong> ${response.text || ''}<br/>
+                      <strong>Key:</strong> ${response.key}<br/>
+                      <strong>Result:</strong> ${response.output || response.encrypted_message || response.dencrypted_message}
+                    </div>
+                  `;
+                  $(resultDiv)
+                    .removeClass('alert-danger')
+                    .addClass('alert-info')
+                    .html(html)
+                    .fadeIn();
+                },
+                error: function (xhr) {
+                  $(resultDiv)
+                    .removeClass('alert-info')
+                    .addClass('alert-danger')
+                    .text(
+                      xhr.responseJSON?.error || 'An unexpected error occurred.'
+                    )
+                    .fadeIn();
+                }
+              });
+            }
+
+            form.classList.add('was-validated');
+          });
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

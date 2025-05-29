@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thực hành An toàn thông tin nâng cao</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #f8f9fa;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15);
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .card-title {
+            font-weight: bold;
+        }
+
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container py-5">
+    <div class="text-center mb-4">
+        <img src="https://file1.hutech.edu.vn/file/editor/homepage/stories/hinh34/logo%20CMYK-01.png" 
+             alt="HUTECH Logo" 
+             class="mb-3" 
+             style="width: 200px;">
+        <h4 class="font-weight-bold">
+            BÀI THỰC HÀNH BẢO MẬT THÔNG TIN NÂNG CAO
+        </h4>
+        <p class="text-muted">Chọn thuật toán mã hóa để bắt đầu</p>
+    </div>
+
+    <div class="row">
+        <!-- Cipher Card -->
+        <div class="col-md-4 mb-4">
+            <a href="/caesar">
+                <div class="card card-hover shadow-sm h-100">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Caesar Cipher</h5>
+                        <p class="card-text text-muted">Mã hóa thay thế cổ điển đơn giản bằng cách dịch ký tự.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <a href="/railfence">
+                <div class="card card-hover shadow-sm h-100">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Rail Fence Cipher</h5>
+                        <p class="card-text text-muted">Mã hóa đường ray bằng cách sắp xếp chữ theo hình zic zac.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <a href="/transposition">
+                <div class="card card-hover shadow-sm h-100">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Transposition Cipher</h5>
+                        <p class="card-text text-muted">Hoán vị vị trí các ký tự theo thứ tự khóa nhất định.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <a href="/vigenere">
+                <div class="card card-hover shadow-sm h-100">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Vigenère Cipher</h5>
+                        <p class="card-text text-muted">Mã hóa nhiều bảng thay thế dựa trên khóa chữ cái.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <a href="/playfair">
+                <div class="card card-hover shadow-sm h-100">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Playfair Cipher</h5>
+                        <p class="card-text text-muted">Mã hóa sử dụng ma trận 5x5 để thay thế từng cặp ký tự.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <a href="/rsa">
+                <div class="card card-hover shadow-sm h-100">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">RSA Cipher</h5>
+                        <p class="card-text text-muted">Thuật toán mã hóa khóa công khai phổ biến nhất hiện nay.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        <hr>
+        <p>&copy; 2025 HUTECH - Bảo mật thông tin nâng cao</p>
+    </footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
